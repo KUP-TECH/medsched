@@ -1,8 +1,4 @@
-<x-basecomponent>
-
-    
-    <p>HOME</p>
+<x-dashboard.basecomponent>
 
 
-
-</x-basecomponent>
+</x-dashboard.basecomponent>

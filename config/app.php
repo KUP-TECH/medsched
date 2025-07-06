@@ -14,7 +14,7 @@ return [
     */
 
     'name' => env('APP_NAME', 'Laravel'),
-
+    'app_title' => 'Medical Appointment',
     /*
     |--------------------------------------------------------------------------
     | Application Environment
