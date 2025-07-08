@@ -3,26 +3,38 @@
 
 return [
 
-    // [
-    //     'menu'      => 'Human Resource',
-    //     'icon'      => 'fa fa-sitemap ftlayer',
-    //     'submenu'   => [
+    [
+        'menu'      => 'Dashboard',
+        'icon'      => 'fa fa-sitemap ftlayer',
+        'submenu'   => [
 
 
-    //         'Staff' => [
-    //             'route' => 'staff'
-    //         ],
-    //         'Department' => [
-    //             'route' => 'department'
-    //         ],
-    //         'Role' => [
-    //             'route' => 'designation'
-    //         ],
+            'HOME' => [
+                'route' => 'home'
+            ],
+            
+
+            'SERVICES' => [
+                'route' => 'home'
+            ],
+
+            'PAGES' => [
+                'route' => 'home'
+            ],
+            
+
+            'CONTACTS' => [
+                'route' => 'home'
+            ],
            
             
-    //     ],
-    // ],
+        ],
+    ],
 
 
-    
+   
+
+
+
+
 ];
