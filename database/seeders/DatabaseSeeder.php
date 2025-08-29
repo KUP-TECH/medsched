@@ -3,9 +3,10 @@
 namespace Database\Seeders;
 
 use App\Models\User;
+use App\Models\Admin;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-
+use Carbon\Carbon;
 class DatabaseSeeder extends Seeder
 {
     /**
@@ -15,9 +16,23 @@ class DatabaseSeeder extends Seeder
     {
         // User::factory(10)->create();
 
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-        ]);
+        $user   = User::create([ 
+                    'fname'     => 'Admin',
+                    'lname'     => 'Admin',
+                    'email'     => 'MedSched@gmail.com',
+                    'password'  => '@default123',
+                    'gender'    => 'male',
+                    'dob'       => now(),
+                    'address'   => 'Cantilan, Surigao Del Sur',
+                    'contactno' => 'N/A',
+                ]);
+                
+        $admin  = Admin::create([
+                    'user_id'   => $user->id,
+                    'role'      => 'System Administrator',
+                ]);
+        
+
+
     }
 }
