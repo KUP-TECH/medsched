@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('service_id')->constrained('service');
             $table->foreignId('patient_id')->constrained('patient');
-            $table->foreignId('attendee_id')->constrained('admin');
+            $table->foreignId('attendee_id')->nullable()->constrained('admin');
             $table->date('date');
             $table->time('start');
             $table->time('end');

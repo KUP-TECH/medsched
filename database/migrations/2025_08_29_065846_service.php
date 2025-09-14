@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('desc')->nullable();
-            $table->json('active_days');
+            $table->json('active_days')->nullable();
             $table->time('start')->nullable();
             $table->time('end')->nullable();
             $table->boolean('is_active')->default(1);

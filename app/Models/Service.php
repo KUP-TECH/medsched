@@ -18,4 +18,9 @@ class Service extends Model
         'end',
         'is_active',
     ];
+
+
+    protected $casts = [
+        'active_days' => 'array',
+    ];
 }

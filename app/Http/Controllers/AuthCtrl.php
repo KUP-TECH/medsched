@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Helpers\PermissionHelper;
+use App\Models\Admin;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\Department;
@@ -51,11 +52,18 @@ class AuthCtrl extends Controller
             $request
             ->session()
             ->regenerate();
-            
-      
+
+            $is_staff   = Admin::join('users','users.id','=','admin.user_id')
+                        ->where('users.id', '=', Auth::user()->id)
+                        ->exists();
+
+            session(['access' => $is_staff ? 'staff' : 'patient']);
+
+            // dd($is_staff, session('access'));
            
 
-            return redirect()->route('dashboard');
+
+            return redirect()->route($is_staff ? 'dashboard' : 'patient_view');
         }
 
         return redirect()->route('login')->with([

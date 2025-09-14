@@ -19,7 +19,6 @@ class Dashboard extends Controller
         $data['patient']        = Patient::count();
         $data['staff']          = Admin::count();
 
-
         return view('pages.dashboard.view', $data);
     }
 

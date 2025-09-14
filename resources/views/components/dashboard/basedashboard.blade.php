@@ -35,7 +35,8 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
         crossorigin="anonymous" />
-
+    {{-- Choice JS --}}
+    
 
     <script src="{{ asset('vendor/soft-ui/js/core/popper.min.js') }}"></script>
     <script src="{{ asset('vendor/soft-ui/js/core/bootstrap.min.js ') }}"></script>
@@ -44,6 +45,8 @@
     <script src="{{ asset('vendor/soft-ui/js/plugins/chartjs.min.js') }}"></script>
     <script src="{{ asset('vendor/soft-ui/js/soft-ui-dashboard.min.js?v=1.1.0') }}"></script>
     
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>
 
 </head>
 
@@ -62,17 +65,18 @@
             <ul class="navbar-nav">
             
             @foreach(config('routes') as $d)
+                @if ($d['access'] == session('access'))
+                    <li class="nav-item my-2">
+                        <a class="nav-link shadow border-radius-md bg-white" href="{{ route($d['route']) }}">
+                            <div
+                                class="icon icon-shape icon-sm shadow border-radius-md bg-info text-center me-2 d-flex align-items-center justify-content-center">
+                                <i class="{{$d['icon']}} fs-6 opacity-8 text-white"></i>
+                            </div>
+                            <span class="nav-link-text ms-1">{{$d['title']}}</span>
+                        </a>
+                    </li>
+                @endif
 
-
-            <li class="nav-item my-2">
-                <a class="nav-link shadow border-radius-md bg-white" href="{{ route($d['route'] ) }}">
-                    <div class="icon icon-shape icon-sm shadow border-radius-md bg-info text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="{{$d['icon']}} fs-6 opacity-8 text-white"></i>
-                    </div>
-                    <span class="nav-link-text ms-1">{{$d['title']}}</span>
-                </a>
-            </li>
-            
             @endforeach
             
             
