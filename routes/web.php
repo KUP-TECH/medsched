@@ -23,7 +23,8 @@ Route::middleware(['auth:web'])->group(function(){
     Route::get('/patient/view', [PatientManager::class,'view'])->name('patient.view');
     Route::get('/client/appointment/view', [Appointments::class,'patient_view'])->name('patient_view');
     Route::post('/client/appointment/view/create', [Appointments::class,'create_appointment'])->name('create_appointment');
-
+    Route::get('/client/appointment/staff_view', [Appointments::class,'staff_view'])->name('staff_view');
+    Route::post('/client/appointment/schedule', [Appointments::class,'schedule_appoinment'])->name('schedule_appoinment');
 
     Route::get('/clinic/clinic_services', [ClinicServices::class,'clinic_services'])->name('clinic_services');
     Route::post('/clinic/create_service', [ClinicServices::class,'create_service'])->name('create_service');

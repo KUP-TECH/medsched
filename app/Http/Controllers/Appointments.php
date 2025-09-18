@@ -10,6 +10,8 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Throwable;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
+
 class Appointments extends Controller
 {
     
@@ -88,5 +90,113 @@ class Appointments extends Controller
                     'alert' => 'alert-success', 
                     'msg'   => 'Created Sucessfully!',
                 ]);
+    }
+
+
+
+
+    public function staff_view(Request $request) {
+        $data['active_link']    = 'Appoinments';
+
+
+        $page       = $request->input('page', 1);
+        $perPage    = 8;
+
+        $data['appointments']   = Appointment::join('service', 'service.id', '=', 'appointment.service_id')
+                                ->select(['appointment.*', 'service.name'])
+                                ->limit($perPage)
+                                ->offset(($page - 1)  * $perPage)->get();
+        
+        $data['page']       = $page;
+        $data['perPage']    = $perPage;
+        $data['count']      = Appointment::count();
+        $data['totalPages'] = ceil($data['count'] / $perPage);
+
+        $data['search']     = null;
+
+        // dd($data['appointments']);
+
+        return view('pages.appointments.staff_view', $data);
+    }
+
+
+
+    public function schedule_appoinment(Request $request) {
+
+        $validated = $request->validate([
+            'start' => 'required',
+            'end'   => 'required',
+            'date'  => 'required',
+            'id'    => 'required',
+        ]);
+
+
+
+        $appointment = Appointment::find($validated['id']);
+
+        if(!$appointment) {
+
+            return  redirect()
+                    ->route('staff_view')
+                    ->with('status',
+                    [
+                        'alert' => 'alert-danger', 
+                        'msg'   => 'Invalid Appointment',
+                    ]);
+        }
+
+        db::beginTransaction();
+
+        try {
+
+            $appointment->start     = $validated['start'];
+            $appointment->end       = $validated['end'];
+            $appointment->date      = $validated['date'];
+            $appointment->status    = 'appointed';
+            $appointment->save();
+
+
+            $patient    = Patient::where('patient.id', $appointment->patient_id)
+                        ->join('users', 'users.id', '=', 'patient.user_id')
+                        ->select(['users.email', 'users.fname', 'users.lname'])
+                        ->first();
+
+            $name = $patient->fname .' '. $patient->lname;
+            $date = $appointment->date;
+            $time = date('h:i a', strtotime($appointment->start)) . ' - ' . date('h:i a', strtotime($appointment->end));
+
+            $message = "Hi, This is from medsched here to inform you Sir/Ma'am $name that you are scheduled at $date between $time, please be on time have a great day!";
+
+            Mail::raw($message, function ($message) use($patient) {
+                $message->to($patient->email)
+                        ->subject('Scheduled Appointment');
+            });
+
+        }
+        catch(Throwable $e) {
+            db::rollback();
+            return  redirect()
+                    ->route('staff_view')
+                    ->with('status',
+                    [
+                        'alert' => 'alert-danger', 
+                        'msg'   => $e->getMessage(),
+                    ]);
+        }
+
+
+        
+
+        db::commit();
+
+        return  redirect()
+                ->route('staff_view')
+                ->with('status',
+                [
+                    'alert' => 'alert-success', 
+                    'msg'   => 'Appointment Scheduled!',
+                ]);
+
+
     }
 }

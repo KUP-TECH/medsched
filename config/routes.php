@@ -19,6 +19,14 @@ return [
         'access'    => 'staff',
     ],
 
+    'appointments_staff' => [
+        'name'      => 'appointments',
+        'title'     => 'Appointments',
+        'icon'      => 'bi bi-journals',
+        'route'     => 'staff_view',
+        'access'    => 'staff'
+    ],
+
     'services' => [
         'name'      => 'services',
         'title'     => 'Services',

@@ -1,17 +1,13 @@
 <x-dashboard.basedashboard active_link="{{ $active_link }}">
     <div class="card">
-        <x-dashboard.cardheader title="My Appoinments">
+        <x-dashboard.cardheader title="Appoinments">
             <div class="row mt-3 align-items-center pb-2 border-bottom">
                 <div class="col">
 
-                    <button class="btn btn-sm btn-outline-info" 
-                        data-bs-toggle="modal" 
-                        data-bs-target="#create-modal">
-                        Schedule An Appoinment
-                    </button>
+                    
                 </div>
                 <div class="col">
-                   
+
                 </div>
             </div>
         </x-dashboard.cardheader>
@@ -24,15 +20,31 @@
                         <th>Date</th>
                         <th>Time Window</th>
                         <th>Status</th>
+                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach ($appointments as $a)
-                        <tr class="text-center">
+                        <tr class="text-center align-center">
                             <td>{{$a->name}}</td>
                             <td>{{$a->date}}</td>
                             <td>{{date('h:i a', strtotime($a->start))}} - {{date('h:i a', strtotime($a->end))}}</td>
                             <td><span class="badge bg-info">{{ucfirst($a->status)}}</span></td>
+                            <td>
+
+                                @switch($a->status)
+                                    @case('pending')
+                                        <button class="btn btn-outline-primary btn-sm"
+                                            data-bs-toggle="modal" 
+                                            data-bs-target="#create-modal"
+                                            data-id={{$a->id}}
+                                        >
+                                            Schedule
+                                        </button>
+                                    @break
+                                @endswitch
+                                
+                            </td>
                         </tr>
                     @endforeach
 
@@ -42,34 +54,21 @@
 
         </div>
         <x-dashboard.paginationcomponent page="{{$page}}" search="{{$search}}" totalPages="{{$totalPages}}"
-            route="{{ 'patient_view' }}">
+            route="{{ 'staff_view' }}">
         </x-dashboard.paginationcomponent>
 
     </div>
 
     <x-dashboard.modalform 
-        route='create_appointment' 
+        route='schedule_appoinment' 
         modal_size='modal-lg' 
         id='create-modal' 
         btn_text="Schedule"
         title="Schedule Appoinment"
     >
 
-        <input type="hidden" name="patient_id" value="{{$patient_id}}">
-        <div class="row">
-            <div class="col">
-                <h5 class="fs-5 fw-bold mb-0">Service</h5>
-                <select name="service_id" id="service-select" class="form-control">
-                    <option value="">Please Select A Service</option>
-                    @foreach ($services as $s)
-                        <option value="{{$s->id}}">{{$s->name}}</option>
-                    @endforeach
-                </select>
-            </div>
-            
-        </div>
+        <input type="hidden" name="id" id="data-id">
 
-        
         <div class="row my-2">
             <div class="col">
                 <h5 class="fs-5 fw-bold mb-0">Select Date</h5>
@@ -77,9 +76,7 @@
             </div>
         </div>
 
-        <p class="text-muted mb-0">Please select you time availability window</p>
         <div class="row my-1">
-
             <div class="col">
                 <h5 class="fs-5 fw-bold mb-0">Start Time</h5>
                 <input type="time" class="form-control" name="start">
@@ -90,17 +87,19 @@
             </div>
         </div>
 
-
     </x-dashboard.modalform>
 
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            new Choices('#service-select', {
-                searchEnabled: true,
-                removeItemButton: false,
-                shouldSort: true,
+
+            document.getElementById('create-modal').addEventListener('show.bs.modal', function(evnt){
+                let btn = evnt.relatedTarget;
+                document.getElementById('data-id').value = btn.getAttribute('data-id');
+
             });
+
+            
         });
     </script>
 
