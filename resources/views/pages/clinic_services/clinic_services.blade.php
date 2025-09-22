@@ -44,7 +44,16 @@
                                     <span class="badge bg-secondary">Appointment Only</span>
                                 @endif
                             </th>
-                            <th></th>
+                            <th>
+                                <button 
+                                    class="btn btn-sm btn-outline-danger" 
+                                    data-id="{{$s->id}}"
+                                    data-bs-toggle="modal" 
+                                    data-bs-target="#delete-modal"
+                                >
+                                    <i class="fa-solid fa-trash fs-6"></i>
+                                </button>
+                            </th>
                         </tr>
                     @endforeach
 
@@ -59,7 +68,15 @@
 
     </div>
 
-    <x-dashboard.modalform route='create_service' modal_size='modal-lg' id='create-modal' btn_text="Schedule">
+
+    <x-dashboard.modalform title="Delete" route='delete_service' modal_size='modal-sm' id='delete-modal' btn_text="Delete">
+        <div class="card-body">
+            <h5 class="card-text">Delete?</h5>
+            <input type="hidden" name="id" id="delete_id">
+        </div>
+    </x-dashboard.modalform>
+
+    <x-dashboard.modalform title="Create" route='create_service' modal_size='modal-lg' id='create-modal' btn_text="Schedule">
 
         <div class="row">
             <div class="col">
@@ -118,5 +135,14 @@
 
 
     </x-dashboard.modalform>
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            document.getElementById('delete-modal').addEventListener('show.bs.modal', function(evnt){
+                document.getElementById('delete_id').value = evnt.relatedTarget.getAttribute('data-id');
+            });
+        });
+    </script>
 
 </x-dashboard.basedashboard>

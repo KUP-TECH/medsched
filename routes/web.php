@@ -28,5 +28,6 @@ Route::middleware(['auth:web'])->group(function(){
 
     Route::get('/clinic/clinic_services', [ClinicServices::class,'clinic_services'])->name('clinic_services');
     Route::post('/clinic/create_service', [ClinicServices::class,'create_service'])->name('create_service');
-
+    Route::post('/clinic/delete_service', [ClinicServices::class,'delete_service'])->name('delete_service');
+    
 });

@@ -35,7 +35,6 @@ class ClinicServices extends Controller
         $data['totalPages'] = ceil($data['count'] / $perPage);
         $data['search']     = $search;
         $data['dayMap']     = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-        
 
 
         return view('pages.clinic_services.clinic_services', $data);
@@ -82,5 +81,39 @@ class ClinicServices extends Controller
                 ]);
     }
 
+    public function delete_service(Request $request) {
+        $validated = $request->validate([
+            'id' => 'required'
+        ]);
 
+
+
+        db::beginTransaction();
+        try {
+
+            Service::find( $validated['id'] )->delete();
+
+        } catch (Throwable $e) {
+            
+            db::rollBack();
+
+            return redirect()
+            ->route('clinic_services')
+            ->with('status',
+            [
+                'alert' => 'alert-danger', 
+                'msg'   => $e->getMessage(),
+            ]);
+        }
+        db::commit();
+
+        return  redirect()
+                ->route('clinic_services')
+                ->with('status',
+                [
+                    'alert' => 'alert-warning', 
+                    'msg'   => 'Deleted Sucessfully!',
+                ]);
+        
+    }
 }
