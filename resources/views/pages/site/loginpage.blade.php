@@ -8,7 +8,13 @@
             <div class="col-xl-4 col-lg-5 col-md-6 d-flex flex-column mx-auto me-5">
               <div class="card border mt-8">
                 <div class="card-header pb-0 text-left bg-transparent">
-                  <h3 class="font-weight-bolder text-info text-gradient">Login</h3>
+                  <h5 class="font-weight-bolder text-secondary text-center">WELCOME TO</h5>
+
+                  <div class="d-flex flex-row justify-content-center align-items-center">
+                    <img src="{{  asset('assets/images/logo.jpg') }}" style="width: 40px; height: 40px;">
+                    <p class="fs-2 text-info text-gradient mb-0 mx-1">MedSched</p>
+                  </div>
+
                   <p class="mb-0">Enter your name and password to sign in</p>
                   <div class="mt-1 px-4">
                     @if ($errors->any())
@@ -56,7 +62,7 @@
                 <div class="card-footer text-center pt-0 px-lg-2 px-1">
                   <p class="mb-4 text-sm mx-auto">
                     Don't have an account?<span class="text-warning fw-bold fs-7"> <a href="{{route('create')}}"
-                        class="text-warning text-decoration-underline">Create an account</a> </span>
+                        class="text-info text-decoration-underline">Create an account</a> </span>
                   </p>
                   
                 </div>
@@ -70,23 +76,6 @@
       </div>
     </section>
   </main>
-  <!-- -------- START FOOTER 3 w/ COMPANY DESCRIPTION WITH LINKS & SOCIAL ICONS & COPYRIGHT ------- -->
-  <footer class="footer mt-5 pt-5">
-    <div class="container">
-      <div class="row">
-        <div class="col-8 mx-auto text-center mt-1">
-          <img src="{{ asset('assets/img/kuptech-icon.png') }}" style="width: 35px; height: 35px;">
-          <p class="mb-0 text-secondary">
-            Copyright ©
-            <script>
-              document.write(new Date().getFullYear())
-            </script> <a href="https://kuptech.lyncxus.online/" class="font-weight-bold" target="_blank">
-              {{ config('const.provider') }}</a>
-          </p>
-        </div>
-      </div>
-    </div>
-  </footer>
-  <!-- -------- END FOOTER 3 w/ COMPANY DESCRIPTION WITH LINKS & SOCIAL ICONS & COPYRIGHT ------- -->
+
 
 </x-site.basecomponent>

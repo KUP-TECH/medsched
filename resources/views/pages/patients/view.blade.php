@@ -12,8 +12,8 @@
             </div>
         </x-dashboard.cardheader>
         <div class="card-body">
-
-            <table class="table table-info table-striped table-responsive">
+            <div class="table-responsive">
+                <table class="table table-info table-striped">
                 <thead>
                     <tr class="text-center">
                         <th>Name</th>
@@ -37,6 +37,8 @@
                 </tbody>
 
             </table>
+            </div>
+            
 
         </div>
         <x-dashboard.paginationcomponent page="{{$page}}" search="{{$search}}" totalPages="{{$totalPages}}"

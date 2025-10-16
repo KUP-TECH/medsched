@@ -12,45 +12,47 @@
             </div>
         </x-dashboard.cardheader>
         <div class="card-body">
-
-            <table class="table table-info table-striped table-responsive">
-                <thead>
-                    <tr class="text-center">
-                        <th>Service</th>
-                        <th>Date</th>
-                        <th>Time Window</th>
-                        <th>Status</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach ($appointments as $a)
-                        <tr class="text-center align-center">
-                            <td>{{$a->name}}</td>
-                            <td>{{$a->date}}</td>
-                            <td>{{date('h:i a', strtotime($a->start))}} - {{date('h:i a', strtotime($a->end))}}</td>
-                            <td><span class="badge bg-info">{{ucfirst($a->status)}}</span></td>
-                            <td>
-
-                                @switch($a->status)
-                                    @case('pending')
-                                        <button class="btn btn-outline-primary btn-sm"
-                                            data-bs-toggle="modal" 
-                                            data-bs-target="#create-modal"
-                                            data-id={{$a->id}}
-                                        >
-                                            Schedule
-                                        </button>
-                                    @break
-                                @endswitch
-                                
-                            </td>
+            <div class="table-responsive">
+                <table class="table table-info table-striped">
+                    <thead>
+                        <tr class="text-center">
+                            <th>Service</th>
+                            <th>Date</th>
+                            <th>Time Window</th>
+                            <th>Status</th>
+                            <th>Action</th>
                         </tr>
-                    @endforeach
+                    </thead>
+                    <tbody>
+                        @foreach ($appointments as $a)
+                            <tr class="text-center align-center">
+                                <td>{{$a->name}}</td>
+                                <td>{{$a->date}}</td>
+                                <td>{{date('h:i a', strtotime($a->start))}} - {{date('h:i a', strtotime($a->end))}}</td>
+                                <td><span class="badge bg-info">{{ucfirst($a->status)}}</span></td>
+                                <td>
 
-                </tbody>
+                                    @switch($a->status)
+                                        @case('pending')
+                                            <button class="btn btn-outline-primary btn-sm"
+                                                data-bs-toggle="modal" 
+                                                data-bs-target="#create-modal"
+                                                data-id={{$a->id}}
+                                            >
+                                                Schedule
+                                            </button>
+                                        @break
+                                    @endswitch
+                                    
+                                </td>
+                            </tr>
+                        @endforeach
 
-            </table>
+                    </tbody>
+
+                </table>
+            </div>
+            
 
         </div>
         <x-dashboard.paginationcomponent page="{{$page}}" search="{{$search}}" totalPages="{{$totalPages}}"

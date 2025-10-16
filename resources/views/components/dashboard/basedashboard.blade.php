@@ -36,108 +36,118 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
         crossorigin="anonymous" />
     {{-- Choice JS --}}
+
+
     
 
-    <script src="{{ asset('vendor/soft-ui/js/core/popper.min.js') }}"></script>
-    <script src="{{ asset('vendor/soft-ui/js/core/bootstrap.min.js ') }}"></script>
-    <script src="{{ asset('vendor/soft-ui/js/plugins/perfect-scrollbar.min.js') }}"></script>
-    <script src="{{ asset('vendor/soft-ui/js/plugins/smooth-scrollbar.min.js') }}"></script>
-    <script src="{{ asset('vendor/soft-ui/js/plugins/chartjs.min.js') }}"></script>
-    <script src="{{ asset('vendor/soft-ui/js/soft-ui-dashboard.min.js?v=1.1.0') }}"></script>
-    
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css" />
     <script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>
 
 </head>
 
 <body class="g-sidenav-show  bg-gray-100">
-    <aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3 " id="sidenav-main">
+    <aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3 "
+        id="sidenav-main">
         <div class="sidenav-header">
-            <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
+            <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none"
+                aria-hidden="true" id="iconSidenav"></i>
             <a class="navbar-brand m-0" target="_blank">
-            <img src="{{ asset('assets/images/icon.png') }}" class="navbar-brand-img h-100" alt="main_logo">
-            <span class="ms-1 font-weight-bold"> {{ config('const.title') }}</span>
+                <img src="{{ asset('assets/images/icon.png') }}" class="navbar-brand-img h-100" alt="main_logo">
+                <span class="ms-1 font-weight-bold"> {{ config('const.title') }}</span>
             </a>
         </div>
         <hr class="horizontal dark mt-0">
-        <div class="collapse navbar-collapse  w-auto " id="sidenav-collapse-main">
+        <div class="collapse navbar-collapse w-auto" id="sidenav-collapse-main">
 
             <ul class="navbar-nav">
-            
-            @foreach(config('routes') as $d)
-                @if ($d['access'] == session('access'))
-                    <li class="nav-item my-2">
-                        <a class="nav-link shadow border-radius-md bg-white" href="{{ route($d['route']) }}">
-                            <div
-                                class="icon icon-shape icon-sm shadow border-radius-md bg-info text-center me-2 d-flex align-items-center justify-content-center">
-                                <i class="{{$d['icon']}} fs-6 opacity-8 text-white"></i>
-                            </div>
-                            <span class="nav-link-text ms-1">{{$d['title']}}</span>
-                        </a>
-                    </li>
-                @endif
+                
+                @foreach(config('routes') as $d)
+                    @if ($d['access'] == session('access'))
+                        <li class="nav-item my-2">
+                            <a class="nav-link shadow border-radius-md bg-white" href="{{ route($d['route']) }}">
+                                <div
+                                    class="icon icon-shape icon-sm shadow border-radius-md bg-info text-center me-2 d-flex align-items-center justify-content-center">
+                                    <i class="{{$d['icon']}} fs-6 opacity-8 text-white"></i>
+                                </div>
+                                <span class="nav-link-text ms-1">{{$d['title']}}</span>
+                            </a>
+                        </li>
+                    @endif
 
-            @endforeach
-            
-            
-            <li class="nav-item mt-3">
-                <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Account</h6>
-            </li>
+                @endforeach
 
-            <li class="nav-item my-1">
-                <a class="nav-link shadow border-radius-md bg-white" href="{{ route('logout') }}">
-                    <div class="icon icon-shape icon-sm shadow border-radius-md bg-info text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="bi bi-person-dash-fill fs-6 opacity-8 text-white"></i>
-                    </div>
-                    <span class="nav-link-text ms-1">Logout</span>
-                </a>
-            </li>
 
-            
-            
-            
+                <li class="nav-item mt-3">
+                    <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Account</h6>
+                </li>
+
+                <li class="nav-item my-1">
+                    <a class="nav-link shadow border-radius-md bg-white" href="{{ route('logout') }}">
+                        <div
+                            class="icon icon-shape icon-sm shadow border-radius-md bg-info text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="bi bi-person-dash-fill fs-6 opacity-8 text-white"></i>
+                        </div>
+                        <span class="nav-link-text ms-1">Logout</span>
+                    </a>
+                </li>
+
+
+
+
             </ul>
         </div>
 
     </aside>
     <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
         <!-- Navbar -->
-        <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" id="navbarBlur" navbar-scroll="true">
+        <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" id="navbarBlur"
+            navbar-scroll="true">
             <div class="container-fluid py-1 px-3">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
-                    <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="javascript:;">Pages</a></li>
-                    <li class="breadcrumb-item text-sm text-dark active" aria-current="page">{{ $active_link }}</li>
+                        <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="javascript:;">Pages</a>
+                        </li>
+                        <li class="breadcrumb-item text-sm text-dark active" aria-current="page">{{ $active_link }}</li>
+                        <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
+                            <a href="javascript:;" class="nav-link text-body p-0" id="iconNavbarSidenav">
+                                <div class="sidenav-toggler-inner">
+                                    <i class="sidenav-toggler-line"></i>
+                                    <i class="sidenav-toggler-line"></i>
+                                    <i class="sidenav-toggler-line"></i>
+                                </div>
+                            </a>
+                        </li>
                     </ol>
                     <h6 class="font-weight-bolder mb-0">{{ $active_link }}</h6>
                 </nav>
             </div>
             <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
-                
-                
+
+
             </div>
         </nav>
         <!-- End Navbar -->
         <div class="container-fluid py-4">
 
-            
+
 
 
             {{ $slot }}
-            
+
             <footer class="footer pt-3  ">
                 <div class="container-fluid">
                     <div class="row align-items-center justify-content-lg-between">
                         <div class="col-lg-6 mb-lg-0 mb-4">
                             <div class="copyright text-center text-sm text-muted text-lg-start">
-                            © <script>
-                                document.write(new Date().getFullYear())
-                            </script>,
-                            made by
-                            <a href="" class="font-weight-bold" target="_blank"> {{ config('const.provider') }}</a>
+                                ©
+                                <script>
+                                    document.write(new Date().getFullYear())
+                                </script>,
+                                made by
+                                <a href="" class="font-weight-bold" target="_blank"> {{ config('const.provider') }}</a>
                             </div>
                         </div>
-                    
+
                     </div>
                 </div>
             </footer>
@@ -145,8 +155,22 @@
         </div>
     </main>
 
+    <script>
+        var win = navigator.platform.indexOf('Win') > -1;
+        if (win && document.querySelector('#sidenav-scrollbar')) {
+        var options = {
+            damping: '0.5'
+        }
+        Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
+        }
+    </script>
 
-
+    <script src="{{ asset('vendor/soft-ui/js/core/popper.min.js') }}"></script>
+    <script src="{{ asset('vendor/soft-ui/js/core/bootstrap.min.js ') }}"></script>
+    <script src="{{ asset('vendor/soft-ui/js/plugins/perfect-scrollbar.min.js') }}"></script>
+    <script src="{{ asset('vendor/soft-ui/js/plugins/smooth-scrollbar.min.js') }}"></script>
+    <script src="{{ asset('vendor/soft-ui/js/plugins/chartjs.min.js') }}"></script>
+    <script src="{{ asset('vendor/soft-ui/js/soft-ui-dashboard.min.js?v=1.1.0') }}"></script>
 </body>
 
 </html>

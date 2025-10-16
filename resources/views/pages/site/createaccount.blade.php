@@ -119,7 +119,7 @@
                                     <div class="card-footer text-center pt-0 px-lg-2 px-1">
                                         <p class="mb-4 text-sm mx-auto">
                                             Don't have an account?<span class="text-warning fw-bold fs-7"> <a href=""
-                                                    class="text-warning text-decoration-underline">Create an account</a>
+                                                    class="text-info text-decoration-underline">Create an account</a>
                                             </span>
                                         </p>
                                         <div class="my-1 px-4">

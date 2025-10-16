@@ -14,52 +14,51 @@
             </div>
         </x-dashboard.cardheader>
         <div class="card-body">
-
-            <table class="table table-info table-striped table-responsive">
-                <thead>
-                    <tr class="text-center">
-                        <th>Service</th>
-                        <th>Description</th>
-                        <th>Time</th>
-                        <th>Days</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach ($services as $s)
+            <div class="table-responsive">
+                <table class="table table-info table-striped">
+                    <thead>
                         <tr class="text-center">
-                            <th>{{$s->name}}</th>
-                            <th>{{$s->desc}}</th>
-                            @if($s->start && $s->end) 
-                                <th>{{date('h:i a', strtotime($s->start))}} - {{date('h:i a', strtotime($s->end))}}</th>
-                            @else
-                                <th><span class="badge bg-secondary">N/A</span></th>
-                            @endif
-                            <th>
-                                @if($s->active_days) 
-                                    @foreach ($s->active_days as $d)
-                                        <span class="badge bg-primary">{{ $dayMap[$d] }}</span>
-                                    @endforeach
-                                @else
-                                    <span class="badge bg-secondary">Appointment Only</span>
-                                @endif
-                            </th>
-                            <th>
-                                <button 
-                                    class="btn btn-sm btn-outline-danger" 
-                                    data-id="{{$s->id}}"
-                                    data-bs-toggle="modal" 
-                                    data-bs-target="#delete-modal"
-                                >
-                                    <i class="fa-solid fa-trash fs-6"></i>
-                                </button>
-                            </th>
+                            <th>Service</th>
+                            <th>Description</th>
+                            <th>Time</th>
+                            <th>Days</th>
+                            <th>Action</th>
                         </tr>
-                    @endforeach
+                    </thead>
+                    <tbody>
+                        @foreach ($services as $s)
+                            <tr class="text-center">
+                                <th>{{$s->name}}</th>
+                                <th>{{$s->desc}}</th>
+                                @if($s->start && $s->end)
+                                    <th>{{date('h:i a', strtotime($s->start))}} - {{date('h:i a', strtotime($s->end))}}</th>
+                                @else
+                                    <th><span class="badge bg-secondary">N/A</span></th>
+                                @endif
+                                <th>
+                                    @if($s->active_days)
+                                        @foreach ($s->active_days as $d)
+                                            <span class="badge bg-primary">{{ $dayMap[$d] }}</span>
+                                        @endforeach
+                                    @else
+                                        <span class="badge bg-secondary">Appointment Only</span>
+                                    @endif
+                                </th>
+                                <th>
+                                    <button class="btn btn-sm btn-outline-danger" data-id="{{$s->id}}" data-bs-toggle="modal"
+                                        data-bs-target="#delete-modal">
+                                        <i class="fa-solid fa-trash fs-6"></i>
+                                    </button>
+                                </th>
+                            </tr>
+                        @endforeach
+                
+                    </tbody>
+                
+                </table>
 
-                </tbody>
-
-            </table>
+            </div>
+            
 
         </div>
         <x-dashboard.paginationcomponent page="{{$page}}" search="{{$search}}" totalPages="{{$totalPages}}"

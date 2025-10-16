@@ -16,29 +16,31 @@
             </div>
         </x-dashboard.cardheader>
         <div class="card-body">
-
-            <table class="table table-info table-striped table-responsive">
-                <thead>
-                    <tr class="text-center">
-                        <th>Service</th>
-                        <th>Date</th>
-                        <th>Time Window</th>
-                        <th>Status</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach ($appointments as $a)
+            <div class="table-responsive">
+                <table class="table table-info table-striped">
+                    <thead>
                         <tr class="text-center">
-                            <td>{{$a->name}}</td>
-                            <td>{{$a->date}}</td>
-                            <td>{{date('h:i a', strtotime($a->start))}} - {{date('h:i a', strtotime($a->end))}}</td>
-                            <td><span class="badge bg-info">{{ucfirst($a->status)}}</span></td>
+                            <th>Service</th>
+                            <th>Date</th>
+                            <th>Time Window</th>
+                            <th>Status</th>
                         </tr>
-                    @endforeach
-
-                </tbody>
-
-            </table>
+                    </thead>
+                    <tbody>
+                        @foreach ($appointments as $a)
+                            <tr class="text-center">
+                                <td>{{$a->name}}</td>
+                                <td>{{$a->date}}</td>
+                                <td>{{date('h:i a', strtotime($a->start))}} - {{date('h:i a', strtotime($a->end))}}</td>
+                                <td><span class="badge bg-info">{{ucfirst($a->status)}}</span></td>
+                            </tr>
+                        @endforeach
+                
+                    </tbody>
+                
+                </table>
+            </div>
+            
 
         </div>
         <x-dashboard.paginationcomponent page="{{$page}}" search="{{$search}}" totalPages="{{$totalPages}}"
