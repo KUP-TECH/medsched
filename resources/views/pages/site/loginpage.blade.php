@@ -1,6 +1,17 @@
 <x-site.basecomponent>
 
-  <main class="main-content  mt-0">
+  <style>
+    .bg-image{
+      background-image: url({{ 'assets/images/background-login.jpg' }});
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center;
+      height: 100vh;
+    }
+
+  </style>
+
+  <main class="main-content bg-image mt-0">
     <section>
       <div class="page-header min-vh-75">
         <div class="container">
