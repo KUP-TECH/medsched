@@ -1,17 +1,35 @@
 <x-site.basecomponent>
 
   <style>
-    .bg-image{
+    .bg-wrapper {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100vh;
+      z-index: -1;
+      overflow: hidden;
+    }
+
+    .bg-image {
       background-image: url({{ 'assets/images/background-login.jpg' }});
       background-repeat: no-repeat;
-      background-size: cover;
+      background-size: 100% 100%;
       background-position: center;
-      height: 100vh;
+      filter: blur(2px);
+      width: 100%;
+      height: 100%;
     }
+
+
 
   </style>
 
-  <main class="main-content bg-image mt-0">
+  <main class="main-content mt-0">
+    <div class="bg-wrapper">
+      <div class="bg-image"></div>
+    </div>
+
     <section>
       <div class="page-header min-vh-75">
         <div class="container">

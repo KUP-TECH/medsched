@@ -7,7 +7,7 @@
                     <button class="btn btn-sm btn-outline-info" 
                         data-bs-toggle="modal" 
                         data-bs-target="#create-modal">
-                        Schedule An Appoinment
+                        Create An Appoinment
                     </button>
                 </div>
                 <div class="col">

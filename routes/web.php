@@ -8,6 +8,7 @@ use App\Http\Controllers\Dashboard;
 use App\Http\Controllers\PatientManager;
 use App\Http\Controllers\Appointments;
 use App\Http\Controllers\ClinicServices;
+use App\Http\Controllers\StaffController;
 
 Route::get('/', [Site::class, 'home'])->name('home');
 Route::get('/login', [Site::class, 'login'])->name('login');
@@ -30,4 +31,9 @@ Route::middleware(['auth:web'])->group(function(){
     Route::post('/clinic/create_service', [ClinicServices::class,'create_service'])->name('create_service');
     Route::post('/clinic/delete_service', [ClinicServices::class,'delete_service'])->name('delete_service');
     
+
+
+    Route::get('/client/staff/view', [StaffController::class,'staff'])->name('staff');
+    Route::post('/client/staff/create_staff', [StaffController::class,'create_staff'])->name('create_staff');
+    Route::post('/client/staff/delete_staff', [StaffController::class,'delete_staff'])->name('delete_staff');
 });

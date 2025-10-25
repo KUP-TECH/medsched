@@ -35,6 +35,15 @@ return [
         'access'    => 'staff'
     ],
 
+
+    'staff' => [
+        'name'      => 'staff',
+        'title'     => 'Staff',
+        'icon'      => 'bi bi-person-workspace',
+        'route'     => 'staff',
+        'access'    => 'staff'
+    ],
+
     'appointments' => [
         'name'      => 'appointments',
         'title'     => 'Appointments',
@@ -43,5 +52,7 @@ return [
         'access'    => 'patient'
     ],
 
+
+    
     
 ];

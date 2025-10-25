@@ -12,5 +12,27 @@ class Patient extends Model
     protected $fillable = [
         'id',
         'user_id',
+        'civil',
+        'gender',
+        'e_contact',
+        'e_number',
+        'idno',
+        'relationship',
+        'blood_type',
+        'allergies',
+        'medications',
+        'previous_illness',
+        'smoke',
+        'illness',
     ];
+
+
+    protected function casts(): array
+    {
+        return [
+            'allergies'         => 'array',
+            'medications'       => 'array',
+            'previuos_illness'  => 'array',
+        ];
+    }
 }

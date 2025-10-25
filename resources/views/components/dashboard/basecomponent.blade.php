@@ -113,9 +113,9 @@
             <div class="col-lg-2 col-md-3 bg-skin-blue sidebar d-none d-md-block" id="sidebar">
                 <ul class="list-group p-3">
                     @foreach (config('menu') as $key => $menu)
-                           
 
-                        @if($menu['access'] === session('access'))
+
+                        @if(in_array(session('access'), $menu['access']))
                             <li class="list-group-item d-flex justify-content-between align-items-center"
                                 data-bs-toggle="collapse" data-bs-target="#submenu{{ $key }}">
                                 <span><i class="{{ $menu['icon'] }} me-2"></i> {{ $menu['menu'] }}</span>

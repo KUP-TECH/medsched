@@ -14,14 +14,25 @@ class PatientManager extends Controller
     
     public function create(Request $request) {
         $validated = $request->validate([
-            'fname'     => 'required',
-            'mname'     => 'nullable',
-            'lname'     => 'required',
-            'dob'       => 'required',
-            'address'   => 'required',
-            'contactno' => 'required',
-            'email'     => 'required',
-            'password'  => 'required|confirmed'
+            'fname'             => 'required',
+            'mname'             => 'nullable',
+            'lname'             => 'required',
+            'dob'               => 'required',
+            'address'           => 'required',
+            'contactno'         => 'required',
+            'gender'            => 'required',
+            'civil'             => 'required',
+            'idno'              => 'nullable',
+            'e_contact'         => 'required',
+            'e_number'          => 'required',
+            'relationship'      => 'required',
+            'allergies'         => 'nullable',
+            'medications'       => 'nullable',
+            'previuos_illness'  => 'nullable',
+            'smoke'             => 'required',
+            'illness'           => 'nullable',
+            'email'             => 'required',
+            'password'          => 'required|confirmed'
         ]);
 
         db::beginTransaction();
@@ -29,9 +40,29 @@ class PatientManager extends Controller
         try {
 
             $user = User::create($validated);
-            Patient::create([
-                'user_id' => $user->id,
-            ]);
+
+
+            if(isset($validated['allergies'])) {
+                $allergies              = $validated['allergies'];
+                $allergies              = explode(',', $allergies);
+                $validated['allergies'] = $allergies;
+            }
+
+            if(isset($validated['medications'])) {
+                $medications              = $validated['medications'];
+                $medications              = explode(',', $medications);
+                $validated['medications'] = $medications;
+            }
+
+            if(isset($validated['previuos_illness'])) {
+                $previuos_illness              = $validated['previuos_illness'];
+                $previuos_illness              = explode(',', $previuos_illness);
+                $validated['previuos_illness'] = $previuos_illness;
+            }
+
+            $validated['user_id']   = $user->id;
+
+            Patient::create($validated);
         } catch(Throwable $e) {
             DB::rollBack();
             return redirect()

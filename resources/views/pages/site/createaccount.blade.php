@@ -59,7 +59,109 @@
         
                                             </div>
 
+                                            <div class="row">
+                                                <div class="col">
+                                                    <label>Gender</label>
+                                                    <div class="mb-3">
+                                                        <select name="gender" class="form-select">
+                                                            <option value="male">Male</option>
+                                                            <option value="female">Female</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col">
+                                                    <label>Civil Status</label>
+                                                    <div class="mb-3">
+                                                        <select name="civil" class="form-select">
+                                                            <option value="single">Single</option>
+                                                            <option value="married">Married</option>
+                                                            <option value="divorced">Divorced</option>
+                                                            <option value="widowed">Widowed</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col">
+                                                    <label>PhilHealth / National ID No.</label>
+                                                    <div class="mb-3">
+                                                        <input type="text" name="idno" class="form-control" required>
+                                                    </div>
+                                                </div>
+                                            </div>
 
+
+                                            <div class="row">
+                                                <div class="col">
+                                                    <label>Emergency Contact Person</label>
+                                                    <input type="text" name="e_contact" class="form-control" required>
+                                                </div>
+                                                <div class="col">
+                                                    <label>Contact No.</label>
+                                                    <input type="text" name="e_number" class="form-control" required>
+                                                </div>
+                                                <div class="col">
+                                                    <label>Relations</label>
+                                                    <input type="text" name="relationship" class="form-control" required>
+                                                </div>
+                                            </div>
+
+
+
+                                            <div class="row">
+                                                <div class="col">
+                                                    <label>Blood Type</label>
+                                                    <select name="blood_type" class="form-select" required>
+                                                        <option value="A">A</option>
+                                                        <option value="A-">A-</option>
+                                                        <option value="B">B</option>
+                                                        <option value="B-">B-</option>
+                                                        <option value="AB">AB</option>
+                                                        <option value="AB-">AB-</option>
+                                                        <option value="O">O</option>
+                                                        <option value="O">O-</option>
+                                                        <option value="unknown">Unknown</option>
+                                                    </select>
+                                                </div>
+                                                <div class="col">
+                                                    <label>Known Allergis <span class="text-muted">Peanut, Shell fish</span></label>
+                                                    <input type="text" name="allergies" class="form-control">
+                                                </div>
+                                                <div class="col">
+                                                    <label>Current Medications <span class="text-muted">Highpertension Meds, etc..</span></label>
+                                                    <input type="text" name="medications" class="form-control">
+                                                </div>
+                                            </div>
+
+                                            <div class="row my-3">
+                                                <div class="col">
+                                                    <label>Previous Surgeris/Major Illness</label>
+                                                    <input type="text" name="previuos_illness" class="form-control">
+                                                </div>
+                                                <div class="col">
+                                                    <label>Family History of Illness</label>
+                                                    <select name="illness" class="form-select">
+                                                        <option value="">None</option>
+                                                        <option value="diabetes">Diabetes</option>
+                                                        <option value="hypertension">Hypertension</option>
+                                                        <option value="heart-disease">Heart disease</option>
+                                                    </select>
+                                                </div>
+                                                <div class="col">
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="radio" name="smoke" value="1" id="radioDefault1">
+                                                        <label class="form-check-label" for="radioDefault1">
+                                                            I smoke
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="radio" name="smoke" value="0" id="radioDefault2" checked>
+                                                        <label class="form-check-label" for="radioDefault2">
+                                                            I dont smoke
+                                                        </label>
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
 
 
                                             <div class="row">
@@ -83,6 +185,9 @@
                                                     </div>
                                                 </div>
                                             </div>
+
+
+                                           
 
                                             <div class="row">
 
@@ -117,11 +222,7 @@
                                         </form>
                                     </div>
                                     <div class="card-footer text-center pt-0 px-lg-2 px-1">
-                                        <p class="mb-4 text-sm mx-auto">
-                                            Don't have an account?<span class="text-warning fw-bold fs-7"> <a href=""
-                                                    class="text-info text-decoration-underline">Create an account</a>
-                                            </span>
-                                        </p>
+                                        
                                         <div class="my-1 px-4">
                                             @if ($errors->any())
                                                 <div class=" text-danger text-center my-auto">
@@ -145,24 +246,6 @@
                 </div>
             </section>
         </main>
-        <!-- -------- START FOOTER 3 w/ COMPANY DESCRIPTION WITH LINKS & SOCIAL ICONS & COPYRIGHT ------- -->
-        <footer class="footer mt-5 pt-5">
-            <div class="container">
-                <div class="row">
-                    <div class="col-8 mx-auto text-center mt-1">
-                        <img src="{{ asset('assets/img/kuptech-icon.png') }}" style="width: 35px; height: 35px;">
-                        <p class="mb-0 text-secondary">
-                            Copyright ©
-                            <script>
-                                document.write(new Date().getFullYear())
-                            </script> <a href="https://kuptech.lyncxus.online/" class="font-weight-bold" target="_blank">
-                                {{ config('const.provider') }}</a>
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </footer>
-        <!-- -------- END FOOTER 3 w/ COMPANY DESCRIPTION WITH LINKS & SOCIAL ICONS & COPYRIGHT ------- -->
-
+       
 
 </x-site.basecomponent>

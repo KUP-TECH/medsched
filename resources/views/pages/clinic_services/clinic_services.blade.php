@@ -75,7 +75,7 @@
         </div>
     </x-dashboard.modalform>
 
-    <x-dashboard.modalform title="Create" route='create_service' modal_size='modal-lg' id='create-modal' btn_text="Schedule">
+    <x-dashboard.modalform title="Create" route='create_service' modal_size='modal-lg' id='create-modal' btn_text="Create">
 
         <div class="row">
             <div class="col">
