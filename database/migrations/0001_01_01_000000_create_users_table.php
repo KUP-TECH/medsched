@@ -30,6 +30,16 @@ return new class extends Migration
         Schema::create('patient', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained('users');
+            $table->enum('civil', ['single', 'married', 'divorced', 'widowed']);
+            $table->string('idno')->nullable();
+            $table->string('e_contact')->nullable();
+            $table->string('e_number')->nullable();
+            $table->string('relationship')->nullable();
+            $table->enum('blood_type', ['A+', 'A-', 'B+','B-','AB+', 'AB-', 'O+', 'O-', 'unknown'])->default('unknown');
+            $table->json('allergies')->nullable();
+            $table->json('medications')->nullable();
+            $table->json('previuos_illness')->nullable();
+            $table->enum('illness', ['diabetes', 'hypertension', 'heart-disease'])->nullable();
         });
 
         Schema::create('admin', function (Blueprint $table) {
