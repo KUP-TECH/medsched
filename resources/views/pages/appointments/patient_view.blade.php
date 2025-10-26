@@ -11,7 +11,6 @@
                     </button>
                 </div>
                 <div class="col">
-                   
                 </div>
             </div>
         </x-dashboard.cardheader>
@@ -83,13 +82,10 @@
         <div class="row my-1">
 
             <div class="col">
-                <h5 class="fs-5 fw-bold mb-0">Start Time</h5>
+                <h5 class="fs-5 fw-bold mb-0">Time</h5>
                 <input type="time" class="form-control" name="start">
             </div>
-            <div class="col">
-                <h5 class="fs-5 fw-bold mb-0">End Time</h5>
-                <input type="time" class="form-control" name="end">
-            </div>
+            
         </div>
 
 

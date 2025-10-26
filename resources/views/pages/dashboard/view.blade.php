@@ -28,7 +28,7 @@
                         <div class="card text-white bg-success shadow-sm h-100">
                             <div class="card-body text-center px-1">
                                 <h5 class="card-title">Appointments</h5>
-                                <h4 class="card-text text-white">N/A</h4>
+                                <h4 class="card-text text-white">{{ $appointments }}</h4>
                             </div>
                         </div>
                     </div>
@@ -38,7 +38,7 @@
                         <div class="card text-white bg-info shadow-sm h-100">
                             <div class="card-body text-center px-1">
                                 <h5 class="card-title text-nowrap">Pending Appointments</h5>
-                                <h4 class="card-text text-white">N/A</h4>
+                                <h4 class="card-text text-white">{{ $pending }}</h4>
                             </div>
                         </div>
                     </div>

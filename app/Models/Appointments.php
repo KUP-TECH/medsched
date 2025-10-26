@@ -16,7 +16,6 @@ class Appointments extends Model
         'attendance_id',
         'date',
         'start',
-        'end',
         'status',
         'remarks',
     ];

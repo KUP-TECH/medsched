@@ -31,18 +31,24 @@
                                 <td>{{date('h:i a', strtotime($a->start))}} - {{date('h:i a', strtotime($a->end))}}</td>
                                 <td><span class="badge bg-info">{{ucfirst($a->status)}}</span></td>
                                 <td>
+                                    @if(isset($user) && $user->role === 'doctor')
+                                        @switch($a->status)
+                                            @case('pending')
 
-                                    @switch($a->status)
-                                        @case('pending')
-                                            <button class="btn btn-outline-primary btn-sm"
-                                                data-bs-toggle="modal" 
-                                                data-bs-target="#create-modal"
-                                                data-id={{$a->id}}
-                                            >
-                                                Schedule
-                                            </button>
-                                        @break
-                                    @endswitch
+                                                <button class="btn btn-outline-primary btn-sm"
+                                                    data-bs-toggle="modal" 
+                                                    data-bs-target="#create-modal"
+                                                    data-id={{$a->id}}
+                                                >
+                                                    Schedule
+                                                </button>
+                                            @break
+                                        @endswitch
+                                    @else
+                                        <span class="bg-warning badge">Doctor Only</span>
+                                    @endif
+
+                                    
                                     
                                 </td>
                             </tr>
@@ -80,13 +86,10 @@
 
         <div class="row my-1">
             <div class="col">
-                <h5 class="fs-5 fw-bold mb-0">Start Time</h5>
+                <h5 class="fs-5 fw-bold mb-0">Time</h5>
                 <input type="time" class="form-control" name="start">
             </div>
-            <div class="col">
-                <h5 class="fs-5 fw-bold mb-0">End Time</h5>
-                <input type="time" class="form-control" name="end">
-            </div>
+           
         </div>
 
     </x-dashboard.modalform>

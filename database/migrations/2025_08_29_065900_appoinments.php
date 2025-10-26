@@ -18,7 +18,6 @@ return new class extends Migration
             $table->foreignId('attendee_id')->nullable()->constrained('admin');
             $table->date('date');
             $table->time('start');
-            $table->time('end');
             $table->enum('status', ['cancelled','pending', 'appointed', 'resolved'])->default('pending');
             $table->string('remarks')->nullable();
         });

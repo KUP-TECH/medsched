@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Admin;
 use Illuminate\Http\Request;
 use App\Models\Appointments as Appointment;
 use App\Models\Patient;
@@ -61,8 +62,6 @@ class Appointments extends Controller
             'patient_id'    => 'required',
             'date'          => 'required',
             'start'         => 'required',
-            'end'           => 'required',
-
         ]);
 
 
@@ -114,7 +113,9 @@ class Appointments extends Controller
 
         $data['search']     = null;
 
-        // dd($data['appointments']);
+        $data['user']       = Admin::where('user_id', Auth::user()->id)->first();
+
+        // dd($data['user']);
 
         return view('pages.appointments.staff_view', $data);
     }
@@ -125,7 +126,6 @@ class Appointments extends Controller
 
         $validated = $request->validate([
             'start' => 'required',
-            'end'   => 'required',
             'date'  => 'required',
             'id'    => 'required',
         ]);

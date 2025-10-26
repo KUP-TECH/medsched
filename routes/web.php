@@ -9,7 +9,7 @@ use App\Http\Controllers\PatientManager;
 use App\Http\Controllers\Appointments;
 use App\Http\Controllers\ClinicServices;
 use App\Http\Controllers\StaffController;
-
+use App\Http\Controllers\MedicalRecords;
 Route::get('/', [Site::class, 'home'])->name('home');
 Route::get('/login', [Site::class, 'login'])->name('login');
 Route::get('/create', [Site::class, 'create'])->name('create');
@@ -36,4 +36,9 @@ Route::middleware(['auth:web'])->group(function(){
     Route::get('/client/staff/view', [StaffController::class,'staff'])->name('staff');
     Route::post('/client/staff/create_staff', [StaffController::class,'create_staff'])->name('create_staff');
     Route::post('/client/staff/delete_staff', [StaffController::class,'delete_staff'])->name('delete_staff');
+
+
+    Route::get('/client/medical_records/view', [MedicalRecords::class,'medical_records'])->name('medical_records');
+
+    Route::get('/client/medical_records/download', [MedicalRecords::class,'download_pdf'])->name('download_pdf');
 });

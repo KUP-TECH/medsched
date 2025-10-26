@@ -44,6 +44,14 @@ return [
         'access'    => 'staff'
     ],
 
+    'medical_records' => [
+        'name'      => 'medical_records',
+        'title'     => 'Medical Records',
+        'icon'      => 'bi bi-clipboard-data-fill',
+        'route'     => 'medical_records',
+        'access'    => 'staff'
+    ],
+
     'appointments' => [
         'name'      => 'appointments',
         'title'     => 'Appointments',
@@ -52,7 +60,7 @@ return [
         'access'    => 'patient'
     ],
 
-
+    
     
     
 ];
