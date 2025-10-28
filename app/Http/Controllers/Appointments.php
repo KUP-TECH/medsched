@@ -150,7 +150,6 @@ class Appointments extends Controller
         try {
 
             $appointment->start     = $validated['start'];
-            $appointment->end       = $validated['end'];
             $appointment->date      = $validated['date'];
             $appointment->status    = 'appointed';
             $appointment->save();
@@ -163,7 +162,7 @@ class Appointments extends Controller
 
             $name = $patient->fname .' '. $patient->lname;
             $date = $appointment->date;
-            $time = date('h:i a', strtotime($appointment->start)) . ' - ' . date('h:i a', strtotime($appointment->end));
+            $time = date('h:i a', strtotime($appointment->start));
 
             $message = "Hi, This is from medsched here to inform you Sir/Ma'am $name that you are scheduled at $date between $time, please be on time have a great day!";
 
