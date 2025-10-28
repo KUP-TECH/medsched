@@ -21,7 +21,7 @@
                         <tr class="text-center">
                             <th>Service</th>
                             <th>Date</th>
-                            <th>Time Window</th>
+                            <th>Time</th>
                             <th>Status</th>
                         </tr>
                     </thead>
@@ -30,7 +30,7 @@
                             <tr class="text-center">
                                 <td>{{$a->name}}</td>
                                 <td>{{$a->date}}</td>
-                                <td>{{date('h:i a', strtotime($a->start))}} - {{date('h:i a', strtotime($a->end))}}</td>
+                                <td>{{date('h:i a', strtotime($a->start))}}</td>
                                 <td><span class="badge bg-info">{{ucfirst($a->status)}}</span></td>
                             </tr>
                         @endforeach
