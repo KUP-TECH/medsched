@@ -60,7 +60,14 @@ return [
         'access'    => 'patient'
     ],
 
-    
+    'profie' => [
+        'name'      => 'profile',
+        'title'     => 'Profile',
+        'icon'      => 'bi bi-person-circle',
+        'route'     => 'profile',
+        'access'    => 'patient'
+    ],
+
     
     
 ];

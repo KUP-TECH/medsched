@@ -110,19 +110,19 @@
                                                 <div class="col">
                                                     <label>Blood Type</label>
                                                     <select name="blood_type" class="form-select" required>
-                                                        <option value="A">A</option>
+                                                        <option value="A">A+</option>
                                                         <option value="A-">A-</option>
-                                                        <option value="B">B</option>
+                                                        <option value="B">B+</option>
                                                         <option value="B-">B-</option>
-                                                        <option value="AB">AB</option>
+                                                        <option value="AB">AB+</option>
                                                         <option value="AB-">AB-</option>
-                                                        <option value="O">O</option>
+                                                        <option value="O">O+</option>
                                                         <option value="O">O-</option>
                                                         <option value="unknown">Unknown</option>
                                                     </select>
                                                 </div>
                                                 <div class="col">
-                                                    <label>Known Allergis <span class="text-muted">Peanut, Shell fish</span></label>
+                                                    <label>Known Allergies <span class="text-muted">Peanut, Shell fish</span></label>
                                                     <input type="text" name="allergies" class="form-control">
                                                 </div>
                                                 <div class="col">

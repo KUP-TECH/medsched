@@ -153,7 +153,7 @@
 
         /* thin separator line like the sample image */
         .sep {
-            border-top: 1px solid #ccc;
+            border-top: 1px solid #777777;
             margin: 14px 0;
         }
 
@@ -206,7 +206,8 @@
                 <div class="form-row line-with-right">
                     <div class="stretch">
                         <label class="label">Full Name</label>
-                        <input type="text" value="{{ $patient->fname . ' ' . $patient->mname . ' ' . $patient->lname }}" readonly>
+                        <input type="text" value="{{ $patient->fname . ' ' . $patient->mname . ' ' . $patient->lname }}"
+                            readonly>
                     </div>
                     <div class="right">
                         <label class="label" style="min-width:48px;">Age</label>
@@ -302,22 +303,24 @@
 
                 <div class="form-row">
                     <label class="label">Known Allergies</label>
-                    <input type="text"
-                        value="{{ $patient->allergies ? implode(', ', $patient->allergies) : '' }}"
-                    readonly>
+                    <input type="text" value="{{ $patient->allergies ? implode(', ', $patient->allergies) : '' }}"
+                        readonly>
                 </div>
 
                 <div class="form-row">
                     <label class="label">Current Medications</label>
-                    <input type="text" value="{{ $patient->medications ? implode(', ', $patient->medications) : 'None' }}" readonly>
+                    <input type="text"
+                        value="{{ $patient->medications ? implode(', ', $patient->medications) : 'None' }}" readonly>
                 </div>
 
                 <div class="form-row">
                     <label class="label">Previous Surgeries / Major Illnesses</label>
-                    <input type="text" value="{{ $patient->previous_illness ? implode(', ', $patient->previous_illness) : 'None' }}" readonly>
+                    <input type="text"
+                        value="{{ $patient->previous_illness ? implode(', ', $patient->previous_illness) : 'None' }}"
+                        readonly>
                 </div>
 
-                
+
             </div>
 
             <div class="sep"></div>
@@ -330,21 +333,24 @@
                     <div>
                         <label class="label">Do you smoke?</label>
                         <div class="checkbox-group">
-                            <label class="checkbox"><input type="checkbox" {{ $patient->smoke ? 'checked' : '' }}> Yes</label>
-                            <label class="checkbox"><input type="checkbox" {{ !$patient->smoke ? 'checked' : '' }}> No</label>
+                            <label class="checkbox"><input type="checkbox" {{ $patient->smoke ? 'checked' : '' }}>
+                                Yes</label>
+                            <label class="checkbox"><input type="checkbox" {{ !$patient->smoke ? 'checked' : '' }}>
+                                No</label>
                         </div>
                     </div>
 
-                    
+
                 </div>
             </div>
 
             <div class="sep"></div>
 
+            <!-- VI. Appointment Details (note: original image uses VI) -->
             <div class="section" id="appointment">
                 <h2>Appointment History</h2>
-            
-            
+
+
                 @foreach ($records as $r)
                     <div class="form-row">
                         <label class="label">Date: {{ $r->date }}</label>
@@ -364,7 +370,7 @@
                     <div class="sep"></div>
 
                 @endforeach
-            
+                
             </div>
 
         </form>

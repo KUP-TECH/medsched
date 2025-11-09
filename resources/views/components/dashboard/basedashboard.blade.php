@@ -37,16 +37,24 @@
         crossorigin="anonymous" />
     {{-- Choice JS --}}
 
-
+   
     
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css" />
     <script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>
 
+    <style>
+        .navbar-vertical.navbar-expand-xs .navbar-collapse {
+            display: block;
+            overflow: auto;
+            height: calc(100vh - 160px) !important;
+        }
+    </style>
+
 </head>
 
 <body class="g-sidenav-show  bg-gray-100">
-    <aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3 "
+    <aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3"
         id="sidenav-main">
         <div class="sidenav-header">
             <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none"
@@ -64,7 +72,7 @@
                 @foreach(config('routes') as $d)
                     @if ($d['access'] == session('access'))
                         <li class="nav-item my-2">
-                            <a class="nav-link shadow border-radius-md bg-white" href="{{ route($d['route']) }}">
+                            <a class="nav-link shadow border-radius-md bg-white border border-info border-1" href="{{ route($d['route']) }}">
                                 <div
                                     class="icon icon-shape icon-sm shadow border-radius-md bg-info text-center me-2 d-flex align-items-center justify-content-center">
                                     <i class="{{$d['icon']}} fs-6 opacity-8 text-white"></i>
@@ -77,19 +85,17 @@
                 @endforeach
 
 
-                <li class="nav-item mt-3">
-                    <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Account</h6>
-                </li>
-
                 <li class="nav-item my-1">
-                    <a class="nav-link shadow border-radius-md bg-white" href="{{ route('logout') }}">
+                    <a class="nav-link shadow border-radius-md bg-white border border-danger border-1" href="{{ route('logout') }}">
                         <div
-                            class="icon icon-shape icon-sm shadow border-radius-md bg-info text-center me-2 d-flex align-items-center justify-content-center">
+                            class="icon icon-shape bg-danger icon-sm shadow border-radius-md bg-info text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="bi bi-person-dash-fill fs-6 opacity-8 text-white"></i>
                         </div>
                         <span class="nav-link-text ms-1">Logout</span>
                     </a>
                 </li>
+
+              
 
 
 

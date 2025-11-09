@@ -32,6 +32,7 @@ class PatientManager extends Controller
             'smoke'             => 'required',
             'illness'           => 'nullable',
             'email'             => 'required',
+            'blood_type'        => 'required',
             'password'          => 'required|confirmed'
         ]);
 

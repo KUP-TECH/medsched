@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Appointments;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
@@ -55,6 +56,11 @@ class MedicalRecords extends Controller
 
 
         $data['patient']    = Patient::leftJoin('users', 'users.id', '=', 'patient.user_id')
+                            ->select([
+                                'users.*',
+                                'patient.*',
+                                'patient.id as patient_id',
+                            ])                    
                             ->where('users.id', $validated['id'])
                             ->where('users.is_active', 1)
                             ->first();
@@ -64,7 +70,39 @@ class MedicalRecords extends Controller
 
         $data['age']        = (int)$dob->diffInYears(Carbon::now());
 
+        $records            = Appointments::where('patient_id', $data['patient']->patient_id)
+                            ->leftJoin('service', 'service.id', '=', 'appointment.service_id')
+                            ->leftJoin('admin', 'admin.id', '=', 'appointment.attendee_id')
+                            ->leftJoin('users', 'users.id', '=', 'admin.user_id')
+                            ->get();
+        $data['records']    = $records;
+        // dd($records);
+
         return view('pages.medical_records.pdf.pdf', $data);
 
+    }
+
+
+    public function profile(Request $request) {
+        $user = Auth::user();
+
+        $data['patient']    = Patient::leftJoin('users', 'users.id', '=', 'patient.user_id')
+                            ->where('users.id', $user->id)
+                            ->where('users.is_active', 1)
+                            ->select([
+                                'users.*',
+                                'patient.*',
+                                'patient.id as patient_id',
+                            ])
+                            ->first();
+        $records            = Appointments::where('patient_id', $data['patient']->patient_id)
+                            ->leftJoin('service', 'service.id', '=', 'appointment.service_id')
+                            ->leftJoin('admin', 'admin.id', '=', 'appointment.attendee_id')
+                            ->leftJoin('users', 'users.id', '=', 'admin.user_id')
+                            ->get();
+        $data['records']    = $records;
+        $dob                = Carbon::parse($data['patient']->dob);
+        $data['age']        = (int)$dob->diffInYears(Carbon::now());
+        return view('pages.medical_records.patient_view', $data);
     }
 }

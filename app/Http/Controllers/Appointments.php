@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Appointments as Appointment;
 use App\Models\Patient;
 use App\Models\Service;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Throwable;
@@ -148,11 +149,19 @@ class Appointments extends Controller
         db::beginTransaction();
 
         try {
+            $admin      = Admin::where('user_id', Auth::user()->id)
+                        ->first();
 
-            $appointment->start     = $validated['start'];
-            $appointment->date      = $validated['date'];
-            $appointment->status    = 'appointed';
+
+            if($admin) {
+                $appointment->attendee_id   = $admin->id;
+            }
+            $appointment->start         = $validated['start'];
+            $appointment->date          = $validated['date'];
+            $appointment->status        = 'appointed';
             $appointment->save();
+
+           
 
 
             $patient    = Patient::where('patient.id', $appointment->patient_id)
@@ -160,11 +169,11 @@ class Appointments extends Controller
                         ->select(['users.email', 'users.fname', 'users.lname'])
                         ->first();
 
-            $name = $patient->fname .' '. $patient->lname;
-            $date = $appointment->date;
-            $time = date('h:i a', strtotime($appointment->start));
+            $name       = $patient->fname .' '. $patient->lname;
+            $date       = $appointment->date;
+            $time       = date('h:i a', strtotime($appointment->start));
 
-            $message = "Hi, This is from medsched here to inform you Sir/Ma'am $name that you are scheduled at $date between $time, please be on time have a great day!";
+            $message    = "Hi, This is from medsched here to inform you Sir/Ma'am $name that you are scheduled at $date between $time, please be on time have a great day!";
 
             Mail::raw($message, function ($message) use($patient) {
                 $message->to($patient->email)

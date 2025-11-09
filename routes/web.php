@@ -41,4 +41,7 @@ Route::middleware(['auth:web'])->group(function(){
     Route::get('/client/medical_records/view', [MedicalRecords::class,'medical_records'])->name('medical_records');
 
     Route::get('/client/medical_records/download', [MedicalRecords::class,'download_pdf'])->name('download_pdf');
+    Route::get('/patient/medical_records/profile', [MedicalRecords::class,'profile'])->name('profile');
+
+    
 });
