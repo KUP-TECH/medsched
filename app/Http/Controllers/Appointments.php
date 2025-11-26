@@ -66,6 +66,27 @@ class Appointments extends Controller
         ]);
 
 
+
+        $existing   = Appointment::where('patient_id', $validated['patient_id'])
+                    ->where('status', 'pending')
+                    ->where('date', $validated['date'])
+                    ->first();
+
+        if(isset($existing)) {
+
+
+            return  redirect()
+                ->route('patient_view')
+                ->with('status',
+                [
+                    'alert' => 'alert-danger', 
+                    'msg'   => 'You already have a pending appointment in that date',
+                ]);
+
+        }
+
+
+
         db::beginTransaction();
 
         try {

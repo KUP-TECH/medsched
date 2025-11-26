@@ -46,4 +46,65 @@
             </div>
         </x-dashboard.cardheader>
     </div>
+    <div class="card-body">
+
+
+        <div class="container-fluid py-2 my-2">
+            <div class="card shadow-sm">
+                <div class="card-header bg-light fw-bold">This month's appointments</div>
+                <div class="card-body">
+                    <canvas id="monthlyApp" height="150"></canvas>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const ctx = document.getElementById('monthlyApp').getContext('2d');
+
+
+
+
+            new Chart(ctx, {
+                type: 'bar', 
+                data: {
+                    labels: @json($apps_label),
+                    datasets: [{
+                        label: 'Monthly Collections',
+                        data: @json($apps_data),
+                        backgroundColor: 'rgba(54, 162, 235, 0.6)',
+                        borderColor: 'rgba(54, 162, 235, 1)',
+                        borderWidth: 1,
+                        borderRadius: 8
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            callbacks: {
+                                label: (context) => context.formattedValue
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                callback: function (value) {
+                                    return value;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+
+
+        });
+    </script>
 </x-dashboard.basedashboard>

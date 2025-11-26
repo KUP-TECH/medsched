@@ -33,7 +33,7 @@ class PatientManager extends Controller
             'illness'           => 'nullable',
             'email'             => 'required',
             'blood_type'        => 'required',
-            'password'          => 'required|confirmed'
+            'password'          => 'required|confirmed|min:8|alpha_num'
         ]);
 
         db::beginTransaction();

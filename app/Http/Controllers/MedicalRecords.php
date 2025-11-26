@@ -64,7 +64,6 @@ class MedicalRecords extends Controller
                             ->where('users.id', $validated['id'])
                             ->where('users.is_active', 1)
                             ->first();
-        // dd($data['patient']);
 
         $dob = Carbon::parse($data['patient']->dob);
 
@@ -76,7 +75,6 @@ class MedicalRecords extends Controller
                             ->leftJoin('users', 'users.id', '=', 'admin.user_id')
                             ->get();
         $data['records']    = $records;
-        // dd($records);
 
         return view('pages.medical_records.pdf.pdf', $data);
 
