@@ -44,4 +44,6 @@ Route::middleware(['auth:web'])->group(function(){
     Route::get('/patient/medical_records/profile', [MedicalRecords::class,'profile'])->name('profile');
 
     
+
+    Route::get('/appointments/get_scheduled_appointments', [Appointments::class, 'get_scheduled_appointments'])->name('get_scheduled_appointments');
 });

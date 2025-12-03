@@ -153,6 +153,7 @@ class Appointments extends Controller
         ]);
 
 
+       
 
         $appointment = Appointment::find($validated['id']);
 
@@ -173,6 +174,8 @@ class Appointments extends Controller
             $admin      = Admin::where('user_id', Auth::user()->id)
                         ->first();
 
+
+            // Get all appointments
 
             if($admin) {
                 $appointment->attendee_id   = $admin->id;
@@ -227,5 +230,39 @@ class Appointments extends Controller
                 ]);
 
 
+    }
+
+
+
+    public function get_scheduled_appointments(Request $request) {
+
+        $date           = $request->input('date');
+
+        $admin          = Admin::where('user_id', Auth::user()->id)
+                        ->first();
+
+        $appointments   = Appointment::where('appointment.attendee_id', $admin->id)
+                        ->join('service', 'service.id', '=', 'appointment.service_id')
+                        ->where('appointment.status', 'appointed')
+                        ->select([
+                            'appointment.start',
+                            'service.name',
+                        ])
+                        ->when($date, function($query) use ($date) {
+                            $query->where('appointment.date', $date);
+                        })
+                        ->whereBetween('appointment.date', [Carbon::today()->firstOfMonth(), Carbon::today()->lastOfMonth()])
+                        ->get()
+                        ->map(function ($appointment) {
+                            $appointment->start = Carbon::parse($appointment->start)->format('h:i A');
+                            return $appointment;
+                        });
+        
+
+        
+
+        return response()->json([
+            'app'   => $appointments,
+        ]);
     }
 }

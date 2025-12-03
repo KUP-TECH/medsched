@@ -94,7 +94,7 @@
         <div class="row my-2">
             <div class="col">
                 <h5 class="fs-5 fw-bold mb-0">Select Date</h5>
-                <input type="date" class="form-control" name="date" id="start-date">
+                <input type="date" class="form-control" name="date" id="start-date" value="{{ Carbon\Carbon::today() }}">
             </div>
         </div>
 
@@ -106,22 +106,63 @@
            
         </div>
 
+        <h5 class="mt-2">Current Appointments</h5>
+        <div class="row my-1">
+            <div class="col" id="appointments">
+                <span class="badge bg-info"></span>
+            </div>
+        </div>
+
     </x-dashboard.modalform>
 
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
 
+            const appContainer  = document.getElementById('appointments');
+            const startDate     = document.getElementById('start-date');
+
             document.getElementById('create-modal').addEventListener('show.bs.modal', function(evnt){
                 let btn = evnt.relatedTarget;
-                document.getElementById('data-id').value = btn.getAttribute('data-id');
-                document.getElementById('start-time').value = btn.getAttribute('data-time');
-                document.getElementById('start-date').value = btn.getAttribute('data-date');
+                document.getElementById('data-id').value        = btn.getAttribute('data-id');
+                document.getElementById('start-time').value     = btn.getAttribute('data-time');
+                document.getElementById('start-date').value     = btn.getAttribute('data-date');
 
+                get_scheduled_apps();
 
             });
 
-            
+            startDate.addEventListener('change', function(){
+                get_scheduled_apps();
+            });
+
+            function get_scheduled_apps() {
+                const date = startDate.value;
+                const url = `{{ route('get_scheduled_appointments') }}?date=${date}`;
+                fetch(url, {
+                    method : 'GET',
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Accept": "application/json",
+                    }
+                })
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data);
+                    appContainer.innerHTML = '';
+                    data.app.forEach(e => {
+                        const newElem       = document.createElement('span');
+                        newElem.classList.add('badge');
+                        newElem.classList.add('bg-info');
+                        newElem.innerText   = `${e.name} - ${e.start}`;
+                        appContainer.appendChild(newElem);
+                    });
+
+                })
+                .catch(err => {
+                    console.error(err);
+                })
+            }
         });
     </script>
 

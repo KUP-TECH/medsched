@@ -26,6 +26,9 @@ class StaffController extends Controller
                     ->select([
                         'users.*',
                         'admin.role',
+                        'admin.start',
+                        'admin.end',
+                        'admin.active_days',
                     ])
                     ->where('admin.role', '!=', 'System Administrator')
                     ->where('users.is_active', 1)
@@ -49,6 +52,7 @@ class StaffController extends Controller
                             ->where('admin.role', '!=', 'System Administrator')
                             ->where('users.is_active', 1)->count();
         $data['totalPages'] = ceil($data['count'] / $perPage);
+        $data['dayMap']     = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
         return view('pages.staff.view', $data);
     } 
@@ -66,6 +70,7 @@ class StaffController extends Controller
             'email'             => 'required',
             'password'          => 'required|confirmed',
             'role'              => 'required',
+            'active_days'       => 'nullable|array'
         ]);
 
 
@@ -77,8 +82,9 @@ class StaffController extends Controller
             $user = User::create($validated);
 
             Admin::create([
-                'user_id'   => $user->id,
-                'role'      => $validated['role'],
+                'user_id'       => $user->id,
+                'role'          => $validated['role'],
+                'active_days'   => $validated['active_days'],
             ]);
 
            
@@ -104,6 +110,15 @@ class StaffController extends Controller
                 'alert' => 'alert-success', 
                 'msg'   => 'Staff Created!',
             ]);
+
+
+    }
+
+
+
+    public function edit_staff(Request $request) {
+
+        
 
 
     }

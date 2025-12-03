@@ -13,5 +13,15 @@ class Admin extends Model
         'id',
         'user_id',
         'role',
+        'start',
+        'end',
+        'active_days'
     ];
+
+    protected function casts(): array
+    {
+        return [
+            'active_days' => 'array',
+        ];
+    }
 }

@@ -22,6 +22,7 @@
                             <th>Address</th>
                             <th>Contact No.</th>
                             <th>Role</th>
+                            <th>Duty</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -33,6 +34,22 @@
                                 <td>{{ $p->address }}</td>
                                 <td>{{ $p->contactno }}</td>
                                 <td>{{ ucfirst($p->role) }}</td>
+                                <td>
+                                    
+                                    @if (isset($p->active_days))
+                                        @forelse($p->active_days as $d)
+                                            <span class="bg-info badge">
+                                                {{ $dayMap[$d] }}
+                                            </span>
+                                        @empty
+                                            <span class="badge bg-secondary">No Clinic Sched</span>
+                                        @endforelse
+                                    @else
+                                        <span class="badge bg-secondary">No Clinic Sched</span>
+                                    @endif
+
+
+                                </td>
                                 <td>
                                     <div class="d-flex flex-row align-items-center justify-content-center">
                                         <button class="badge bg-danger border-1 border-dark mx-1" 
@@ -154,6 +171,26 @@
 
             </div>
 
+            <h5>Clinic Schedule</h5>
+            <div class="row">
+                <div class="col">
+                    <div class="d-flex flex-column">
+                        <div class="btn-group" role="group" aria-label="Weekday toggle buttons">
+                    
+                            @for ($i = 0; $i <= 6; $i++)
+                                <input type="checkbox" class="btn-check" id="day{{ $i }}" autocomplete="off" value="{{ $i }}"
+                                    name="active_days[]">
+                                <label class="btn btn-outline-info" for="day{{ $i }}">{{ $dayMap[$i] }}</label>
+                            @endfor
+                    
+                        </div>
+                    </div>
+
+                </div>
+
+
+            </div>
+
         </div>
 
 
@@ -180,6 +217,9 @@
             document.getElementById('delete-staff').addEventListener('show.bs.modal', function(e){
                 document.getElementById('data-id').value = e.relatedTarget.getAttribute('data-id');
             });
+
+
+            
 
         });
 
