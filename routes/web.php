@@ -19,6 +19,11 @@ Route::post('/create/post', [PatientManager::class,'create'])->name('create.post
 Route::middleware(['auth:web'])->group(function(){
     Route::get('/dashboard/dashboard', [Dashboard::class, 'dashboard'])->name('dashboard');
 
+
+    Route::get('/site/verify_token_view', [Site::class, 'verify_token_view'])->name('verify_token_view');
+    Route::get('/site/resend_token', [Site::class, 'resend_token'])->name('resend_token');
+    Route::post('/site/verify_token', [Site::class, 'verify_token'])->name('verify_token');
+
     Route::get('/logout', [AuthCtrl::class, 'logout'])->name('logout');
 
     Route::get('/patient/view', [PatientManager::class,'view'])->name('patient.view');

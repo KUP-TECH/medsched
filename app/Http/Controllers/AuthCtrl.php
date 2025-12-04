@@ -12,7 +12,13 @@ use Illuminate\Support\Facades\Validator;
 use App\Models\User;
 use App\Models\student;
 use App\Models\Modules;
+use App\Models\Patient;
+use App\Models\VerificationToken;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Mail;
+
 class AuthCtrl extends Controller
 {
    
@@ -60,8 +66,32 @@ class AuthCtrl extends Controller
             session(['access' => $is_staff ? 'staff' : 'patient']);
 
             // dd($is_staff, session('access'));
-           
+            if(!$is_staff) {
 
+                $patient    = Patient::where('user_id', Auth::user()->id)
+                            ->first();
+
+                if(isset($patient) && $patient->is_verified == false) {
+                    $token = Str::random(64);
+                    VerificationToken::create([
+                        'patient_id'    => $patient->id,
+                        'token'         => $token,
+                        'expiration'    => Carbon::now()->addHour(),
+                    ]);
+
+
+                    $message    = "This is from medsched and this is your verification token $token please dont share this to anyone";
+
+                    Mail::raw($message, function ($message)  {
+                        $message->to(Auth::user()->email)
+                                ->subject('Verification Token');
+                    });
+
+                    return  redirect()
+                            ->route('verify_token_view');
+                }
+
+            }
 
             return redirect()->route($is_staff ? 'dashboard' : 'patient_view');
         }

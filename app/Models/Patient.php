@@ -24,6 +24,7 @@ class Patient extends Model
         'previous_illness',
         'smoke',
         'illness',
+        'is_verified',
     ];
 
 
